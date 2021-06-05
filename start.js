@@ -2,22 +2,46 @@ const main = document.querySelector("#main");
 const self = document.querySelector("#self");
 const result = document.querySelector("#result");
 
-const endPoint = 28;
-const select = [0, 0, 0];
+const endPoint = 20;
+const select = [0, 0, 0, 0];
 
 function calResult(){
   console.log(select);
-  var result = select.indexOf(Math.max(...select));
+  var sum=0;
+  for(let i=0; i<select.length; i++)
+  {
+    sum+=select[i]*i;
+  } 
+  var result=sum;
+  console.log(result);
   return result;
 }
 
 function setResult(){
   let point = calResult();
+  console.log(point)
   const resultName = document.querySelector('.resultName');
-  resultName.innerHTML = infoList[point].name;
-
   const resultDesc = document.querySelector('.resultDesc');
-  resultDesc.innerHTML = infoList[point].desc;
+  if(point<16)
+  {
+    resultName.innerHTML = infoList[0].name;
+    resultDesc.innerHTML = infoList[0].desc;
+  }
+  else if(point<21)
+  {
+    resultName.innerHTML = infoList[1].name;
+    resultDesc.innerHTML = infoList[1].desc;
+  }
+  else if(point<25)
+  {
+    resultName.innerHTML = infoList[2].name;
+    resultDesc.innerHTML = infoList[2].desc;
+  }
+  else if(point<endPoint*(select.length-1)*(4/4))
+  {
+    resultName.innerHTML = infoList[3].name;
+    resultDesc.innerHTML = infoList[3].desc;
+  }
 }
 
 function goResult(){
@@ -32,6 +56,7 @@ function goResult(){
     }, 450)})
     console.log(result)  
     setResult();
+    console.log()
 }
 
 function addAnswer(answerText, qIdx, idx){
